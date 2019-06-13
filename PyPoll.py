@@ -27,25 +27,45 @@ for row in data:
         #count the number of votes
         votes = votes + 1
         #condition to append unique candidate and get count of votes
+        #Find count votes for each candiate
         if row[2] not in candidates:
                 candidates.append(row[2])
                 candidate_vote[row[2]] = 0
         candidate_vote[row[2]] = candidate_vote[row[2]] + 1
 #Find count of votes for each candiate / total votes (i.e. votes) * 100 = % of votes
-#Find count votes for each candiate
 for (key, value) in candidate_vote.items():
     candidate_percent[key] = round(value/votes * 100, 1)
     if winning < value:
         winning = value
         elected_candidate = key
 
-for (key,value) in candidate_vote.items():
-        print(f'{key} {candidate_percent[key]} {value}')
 
-#print(data)
+print("Election Results")
+print("-------------------------")
 print("Total Votes: " + str(votes))
-print(candidates)
-print(candidate_vote)
-print(candidate_percent)
-print(elected_candidate)
-print(winning)
+print("-------------------------")
+for (key,value) in candidate_vote.items():
+        print(f'{key} {candidate_percent[key]}% ({value})')
+print("-------------------------")
+print("Winner: " + elected_candidate)
+print("-------------------------")
+
+# Specify the file to write to
+output_path = os.path.join("pypoll.txt")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+# can also delcare write as the mode, with open(output_path, mode="w', newline=' ') as csvfile:
+with open(output_path, 'w', newline='') as csvfile:
+
+    # Initialize csv.writer
+    csvwriter = csv.writer(csvfile, delimiter=',')
+    #print the election results
+    csvwriter.writerow(['Election Results'])
+    csvwriter.writerow(['-------------------------'])
+    csvwriter.writerow(['Total Votes: ' + str(votes)])
+    csvwriter.writerow(['-------------------------'])
+    for (key,value) in candidate_vote.items():
+        csvwriter.writerow([f'{key} {candidate_percent[key]}% ({value})'])
+    csvwriter.writerow(['-------------------------'])
+    csvwriter.writerow(['Winner: ' + elected_candidate])
+    csvwriter.writerow(['-------------------------'])
