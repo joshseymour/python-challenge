@@ -52,7 +52,7 @@ print("Greatest Increase in Profits: " + str(max_value[0]) + " ($" + str(greates
 print("Greatest Decrease in Profits: " + str(min_value[0]) + " ($" + str(greatest_decrease) + ")")
 
 # Specify the file to write to
-output_path = os.path.join("output", "pybank.txt")
+output_path = os.path.join("pybank.txt")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
 # can also delcare write as the mode, with open(output_path, mode="w', newline=' ') as csvfile:
