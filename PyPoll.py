@@ -54,7 +54,6 @@ print("-------------------------")
 # Specify the file to write to
 output_path = os.path.join("pypoll_output.txt")
 
-# Output results to .txt file in same directory
 with open(output_path, 'w', newline='') as csvfile:
 
     # Initialize csv.writer
