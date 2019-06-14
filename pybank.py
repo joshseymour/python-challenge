@@ -55,12 +55,10 @@ print("Greatest Decrease in Profits: " + str(min_value[0]) + " ($" + str(greates
 # Specify the file to write to
 output_path = os.path.join("pybank_output.txt")
 
-# Output results to .txt file in same directory
 with open(output_path, 'w', newline='') as csvfile:
 
     # Initialize csv.writer
     csvwriter = csv.writer(csvfile, delimiter=',')
-
     #print the results
     csvwriter.writerow(['Financial Analysis'])
     csvwriter.writerow(['------------------'])
