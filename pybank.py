@@ -8,7 +8,7 @@ csvpath = os.path.join("Resources", "budget_data.csv")
 #create counter for month and budget 
 month = 0
 budget = 0
-#create lists for change and csv reader w/o header
+#create lists for change and csvreader w/o header
 change = []
 data = []
 
@@ -16,9 +16,10 @@ data = []
 with open(csvpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     next(csvreader)
-
+    #create list w/o the headers
     data = list(csvreader)
 
+#add to the counters
 for row in data:
     #count the number of months
     month = month + 1
@@ -27,9 +28,9 @@ for row in data:
 
 #create list of budget changes
 for i in range(1,month):
-    #create list of changes
     change.append(int(data[i][1]) - int(data[i-1][1]))
 
+#create variables for average change and greatest increase/decrease in profit
 total_change = sum(change)
 avg_change = total_change/(month - 1)
 
@@ -42,7 +43,7 @@ max_value = data[max_index + 1]
 min_index = change.index(greatest_decrease)
 min_value = data[min_index + 1]
 
-#check output
+#print out the results in terminal
 print("Financial Analysis")
 print("------------------")
 print("Total Months: " + str(month))
@@ -52,19 +53,17 @@ print("Greatest Increase in Profits: " + str(max_value[0]) + " ($" + str(greates
 print("Greatest Decrease in Profits: " + str(min_value[0]) + " ($" + str(greatest_decrease) + ")")
 
 # Specify the file to write to
-output_path = os.path.join("pybank.txt")
+output_path = os.path.join("pybank_output.txt")
 
-# Open the file using "write" mode. Specify the variable to hold the contents
-# can also delcare write as the mode, with open(output_path, mode="w', newline=' ') as csvfile:
+# Output results to .txt file in same directory
 with open(output_path, 'w', newline='') as csvfile:
 
     # Initialize csv.writer
     csvwriter = csv.writer(csvfile, delimiter=',')
 
-    # Write the first row (column headers)
+    #print the results
     csvwriter.writerow(['Financial Analysis'])
     csvwriter.writerow(['------------------'])
-    # Write the second row
     csvwriter.writerow(['Total Months: ' + str(month)])
     csvwriter.writerow(['Total: ' + str(budget)])
     csvwriter.writerow(['Average Change: $' + str(avg_change)])
